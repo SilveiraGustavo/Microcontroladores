@@ -1,0 +1,4 @@
+main
+	acender_leds
+	apagar_leds
+	acender_quatro_primeiros
