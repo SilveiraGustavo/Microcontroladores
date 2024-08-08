@@ -1,0 +1,12 @@
+0	1	mikroCPIC1618.exe -MSF -DBG -pP18F4550 -DL -O11111114 -fo8 -N"C:\Users\gugav\Desktop\Computação\7º Período - Eng.Computação\Microcontroladores\MicroC - Aula 23\Exercicio 6\Exercicio6.mcppi" -SP"C:\Users\Public\Documents\Mikroelektronika\mikroC PRO for PIC\Defs\" -SP"C:\Users\Public\Documents\Mikroelektronika\mikroC PRO for PIC\uses\P18\" -SP"C:\Users\gugav\Desktop\Computação\7º Período - Eng.Computação\Microcontroladores\MicroC - Aula 23\Exercicio 6\" -IP"C:\Users\Public\Documents\Mikroelektronika\mikroC PRO for PIC\uses\P18\" "Exercicio6.c" "__Lib_Math.mcl" "__Lib_MathDouble.mcl" "__Lib_System.mcl" "__Lib_Delays.mcl" "__Lib_CString.mcl" "__Lib_Conversions.mcl" "__Lib_ADC_A_D.mcl" "__Lib_LcdConsts.mcl" "__Lib_Lcd.mcl"	 
+hint: 0	1139	Available RAM: 2027 [bytes], Available ROM: 32768 [bytes]	 
+diagnostics: 0	122	Compilation Started	Exercicio6.c
+diagnostics: 72	123	Compiled Successfully	Exercicio6.c
+hint: 29	1164	Variable 'valorADC' has been eliminated by optimizer	Exercicio6.c
+diagnostics: 0	127	All files Compiled in 94 ms	 
+hint: 0	1144	Used RAM (bytes): 93 (5%)  Free RAM (bytes): 1934 (95%)	Used RAM (bytes): 93 (5%)  Free RAM (bytes): 1934 (95%)
+hint: 0	1144	Used ROM (bytes): 3444 (11%)  Free ROM (bytes): 29324 (89%)	Used ROM (bytes): 3444 (11%)  Free ROM (bytes): 29324 (89%)
+diagnostics: 0	125	Project Linked Successfully	Exercicio6.mcppi
+diagnostics: 0	128	Linked in 31 ms	 
+diagnostics: 0	129	Project 'Exercicio6.mcppi' completed: 281 ms	 
+diagnostics: 0	103	Finished successfully: 08 ago 2024, 13:12:05	Exercicio6.mcppi
