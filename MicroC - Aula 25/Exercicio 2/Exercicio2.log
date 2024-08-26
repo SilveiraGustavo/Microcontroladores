@@ -1,0 +1,7 @@
+0	1	mikroCPIC1618.exe -MSF -DBG -pP18F4550 -DL -O11111114 -fo8 -N"C:\Users\gugav\Desktop\Computação\7º Período - Eng.Computação\Microcontroladores\MicroC - Aula 25\Exercicio 2\Exercicio2.mcppi" -SP"C:\Users\Public\Documents\Mikroelektronika\mikroC PRO for PIC\Defs\" -SP"C:\Users\Public\Documents\Mikroelektronika\mikroC PRO for PIC\uses\P18\" -SP"C:\Users\gugav\Desktop\Computação\7º Período - Eng.Computação\Microcontroladores\MicroC - Aula 25\Exercicio 2\" -IP"C:\Users\Public\Documents\Mikroelektronika\mikroC PRO for PIC\uses\P18\" "Exercicio2.c" "__Lib_Math.mcl" "__Lib_MathDouble.mcl" "__Lib_System.mcl" "__Lib_Delays.mcl" "__Lib_CString.mcl" "__Lib_Conversions.mcl" "__Lib_ADC_A_D.mcl" "__Lib_PWM_c21.mcl" "__Lib_LcdConsts.mcl" "__Lib_Lcd.mcl"	 
+hint: 0	1139	Available RAM: 2027 [bytes], Available ROM: 32768 [bytes]	 
+diagnostics: 0	122	Compilation Started	Exercicio2.c
+error: 37	317	Operator '' is not applicable to these operands ''	Exercicio2.c
+error: 37	317	Operator '+' is not applicable to these operands ''	Exercicio2.c
+warning: 37	1508	Implicit conversion of int to ptr	Exercicio2.c
+error: 0	102	Finished (with errors): 15 ago 2024, 10:39:06	Exercicio2.mcppi
