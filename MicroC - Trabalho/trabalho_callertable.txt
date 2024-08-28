@@ -107,5 +107,3 @@ main
 			Delay_1us
 			Delay_5500us
 			Delay_50us
-		Button
-			Delay_500us

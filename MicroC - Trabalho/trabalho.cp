@@ -53,7 +53,6 @@ void PWM_Cooler() {
 
 
  if (Button(&PORTB, 1, 1, 0) == 255) {
-
  break;
  }
  }
@@ -88,7 +87,7 @@ void decremento_display() {
 
  TRISD = 0;
  TRISA = 0;
- PORTA = 0b00111100;
+ PORTA = 0b00111000;
  PORTB = 0;
 
  for (decremento = 9; decremento >= 0; decremento--) {
@@ -100,9 +99,8 @@ void decremento_display() {
 
 void Semafaro_de_transito() {
  int tempo_sinal_fechado;
-
- ADCON1 = 00000110;
-
+ TRISA = 0;
+ PORTA = 0;
  TRISB = 0;
  TRISC = 0;
  TRISC.F0 = 0;
@@ -116,6 +114,7 @@ void Semafaro_de_transito() {
  if (tempo_sinal_fechado == 9) {
  decremento_display();
  }
+ PORTB = 255;
  delay_ms(1000);
  }
 
@@ -129,17 +128,10 @@ void Semafaro_de_transito() {
  PORTC.F1 = 1;
  delay_ms(1000);
  PORTC.F1 = 0;
-
-
  decremento_display();
 
  PORTC.F0 = 0;
  Lcd_Cmd(_LCD_CLEAR);
- }
-
-
- if (Button(&PORTB, 1, 1, 0) == 255) {
- break;
  }
  }
 }

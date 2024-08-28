@@ -122,34 +122,34 @@ L_PWM_Cooler3:
 	XORLW       255
 	BTFSS       STATUS+0, 2 
 	GOTO        L_PWM_Cooler5
-;trabalho.c,56 :: 		break; // Sai do loop
+;trabalho.c,55 :: 		break; // Sai do loop
 	GOTO        L_PWM_Cooler4
-;trabalho.c,57 :: 		}
+;trabalho.c,56 :: 		}
 L_PWM_Cooler5:
-;trabalho.c,58 :: 		}
+;trabalho.c,57 :: 		}
 	GOTO        L_PWM_Cooler3
 L_PWM_Cooler4:
-;trabalho.c,59 :: 		}
+;trabalho.c,58 :: 		}
 L_end_PWM_Cooler:
 	RETURN      0
 ; end of _PWM_Cooler
 
 _Resistencia:
 
-;trabalho.c,61 :: 		void Resistencia() {
-;trabalho.c,63 :: 		ADCON1 = 0b00001100; // Configurações do ADC
+;trabalho.c,60 :: 		void Resistencia() {
+;trabalho.c,62 :: 		ADCON1 = 0b00001100; // Configurações do ADC
 	MOVLW       12
 	MOVWF       ADCON1+0 
-;trabalho.c,64 :: 		TRISB = 0b00000011;
+;trabalho.c,63 :: 		TRISB = 0b00000011;
 	MOVLW       3
 	MOVWF       TRISB+0 
-;trabalho.c,65 :: 		TRISC = 0; // Configura a PORTC como saída
+;trabalho.c,64 :: 		TRISC = 0; // Configura a PORTC como saída
 	CLRF        TRISC+0 
-;trabalho.c,67 :: 		while (1) {
+;trabalho.c,66 :: 		while (1) {
 L_Resistencia6:
-;trabalho.c,68 :: 		PORTC.F5 = 1; // Liga a resistência
+;trabalho.c,67 :: 		PORTC.F5 = 1; // Liga a resistência
 	BSF         PORTC+0, 5 
-;trabalho.c,69 :: 		Leitura_resistencia_valor = ADC_Read(2);
+;trabalho.c,68 :: 		Leitura_resistencia_valor = ADC_Read(2);
 	MOVLW       2
 	MOVWF       FARG_ADC_Read_channel+0 
 	CALL        _ADC_Read+0, 0
@@ -157,7 +157,7 @@ L_Resistencia6:
 	MOVWF       Resistencia_Leitura_resistencia_valor_L0+0 
 	MOVF        R1, 0 
 	MOVWF       Resistencia_Leitura_resistencia_valor_L0+1 
-;trabalho.c,70 :: 		Lcd_Out(3,-3, "Pressione B1");
+;trabalho.c,69 :: 		Lcd_Out(3,-3, "Pressione B1");
 	MOVLW       3
 	MOVWF       FARG_Lcd_Out_row+0 
 	MOVLW       253
@@ -167,7 +167,7 @@ L_Resistencia6:
 	MOVLW       hi_addr(?lstr1_trabalho+0)
 	MOVWF       FARG_Lcd_Out_text+1 
 	CALL        _Lcd_Out+0, 0
-;trabalho.c,71 :: 		Lcd_Out(4, -3, "Para sair!");
+;trabalho.c,70 :: 		Lcd_Out(4, -3, "Para sair!");
 	MOVLW       4
 	MOVWF       FARG_Lcd_Out_row+0 
 	MOVLW       253
@@ -177,7 +177,7 @@ L_Resistencia6:
 	MOVLW       hi_addr(?lstr2_trabalho+0)
 	MOVWF       FARG_Lcd_Out_text+1 
 	CALL        _Lcd_Out+0, 0
-;trabalho.c,73 :: 		if (Leitura_resistencia_valor >= 40.0) {
+;trabalho.c,72 :: 		if (Leitura_resistencia_valor >= 40.0) {
 	MOVF        Resistencia_Leitura_resistencia_valor_L0+0, 0 
 	MOVWF       R0 
 	MOVF        Resistencia_Leitura_resistencia_valor_L0+1, 0 
@@ -199,11 +199,11 @@ L_Resistencia6:
 	MOVF        R0, 1 
 	BTFSC       STATUS+0, 2 
 	GOTO        L_Resistencia8
-;trabalho.c,74 :: 		PWM_Cooler(); // Chama a função de controle do cooler
+;trabalho.c,73 :: 		PWM_Cooler(); // Chama a função de controle do cooler
 	CALL        _PWM_Cooler+0, 0
-;trabalho.c,75 :: 		}
+;trabalho.c,74 :: 		}
 L_Resistencia8:
-;trabalho.c,78 :: 		if (Button(&PORTB, 1, 1, 0) == 255) {
+;trabalho.c,77 :: 		if (Button(&PORTB, 1, 1, 0) == 255) {
 	MOVLW       PORTB+0
 	MOVWF       FARG_Button_port+0 
 	MOVLW       hi_addr(PORTB+0)
@@ -218,37 +218,37 @@ L_Resistencia8:
 	XORLW       255
 	BTFSS       STATUS+0, 2 
 	GOTO        L_Resistencia9
-;trabalho.c,79 :: 		break; // Sai do loop
+;trabalho.c,78 :: 		break; // Sai do loop
 	GOTO        L_Resistencia7
-;trabalho.c,80 :: 		}
+;trabalho.c,79 :: 		}
 L_Resistencia9:
-;trabalho.c,81 :: 		}
+;trabalho.c,80 :: 		}
 	GOTO        L_Resistencia6
 L_Resistencia7:
-;trabalho.c,82 :: 		}
+;trabalho.c,81 :: 		}
 L_end_Resistencia:
 	RETURN      0
 ; end of _Resistencia
 
 _decremento_display:
 
-;trabalho.c,84 :: 		void decremento_display() {
-;trabalho.c,86 :: 		int* Lista_Segmentos = criar_Lista();
+;trabalho.c,83 :: 		void decremento_display() {
+;trabalho.c,85 :: 		int* Lista_Segmentos = criar_Lista();
 	CALL        _criar_Lista+0, 0
 	MOVF        R0, 0 
 	MOVWF       decremento_display_Lista_Segmentos_L0+0 
 	MOVF        R1, 0 
 	MOVWF       decremento_display_Lista_Segmentos_L0+1 
-;trabalho.c,88 :: 		TRISD = 0;
+;trabalho.c,87 :: 		TRISD = 0;
 	CLRF        TRISD+0 
-;trabalho.c,89 :: 		TRISA = 0;
+;trabalho.c,88 :: 		TRISA = 0;
 	CLRF        TRISA+0 
-;trabalho.c,90 :: 		PORTA = 0b00111100;
-	MOVLW       60
+;trabalho.c,89 :: 		PORTA = 0b00111000;
+	MOVLW       56
 	MOVWF       PORTA+0 
-;trabalho.c,91 :: 		PORTB = 0;
+;trabalho.c,90 :: 		PORTB = 0;
 	CLRF        PORTB+0 
-;trabalho.c,93 :: 		for (decremento = 9; decremento >= 0; decremento--) {
+;trabalho.c,92 :: 		for (decremento = 9; decremento >= 0; decremento--) {
 	MOVLW       9
 	MOVWF       decremento_display_decremento_L0+0 
 	MOVLW       0
@@ -260,13 +260,13 @@ L_decremento_display10:
 	MOVLW       128
 	SUBWF       R0, 0 
 	BTFSS       STATUS+0, 2 
-	GOTO        L__decremento_display37
+	GOTO        L__decremento_display36
 	MOVLW       0
 	SUBWF       decremento_display_decremento_L0+0, 0 
-L__decremento_display37:
+L__decremento_display36:
 	BTFSS       STATUS+0, 0 
 	GOTO        L_decremento_display11
-;trabalho.c,94 :: 		PORTD = Lista_Segmentos[decremento];
+;trabalho.c,93 :: 		PORTD = Lista_Segmentos[decremento];
 	MOVF        decremento_display_decremento_L0+0, 0 
 	MOVWF       R0 
 	MOVF        decremento_display_decremento_L0+1, 0 
@@ -282,7 +282,7 @@ L__decremento_display37:
 	MOVWF       FSR0L+1 
 	MOVF        POSTINC0+0, 0 
 	MOVWF       PORTD+0 
-;trabalho.c,95 :: 		delay_ms(1000);
+;trabalho.c,94 :: 		delay_ms(1000);
 	MOVLW       11
 	MOVWF       R11, 0
 	MOVLW       38
@@ -298,44 +298,45 @@ L_decremento_display13:
 	BRA         L_decremento_display13
 	NOP
 	NOP
-;trabalho.c,93 :: 		for (decremento = 9; decremento >= 0; decremento--) {
+;trabalho.c,92 :: 		for (decremento = 9; decremento >= 0; decremento--) {
 	MOVLW       1
 	SUBWF       decremento_display_decremento_L0+0, 1 
 	MOVLW       0
 	SUBWFB      decremento_display_decremento_L0+1, 1 
-;trabalho.c,96 :: 		}
+;trabalho.c,95 :: 		}
 	GOTO        L_decremento_display10
 L_decremento_display11:
-;trabalho.c,97 :: 		PORTA = 0;
+;trabalho.c,96 :: 		PORTA = 0;
 	CLRF        PORTA+0 
-;trabalho.c,98 :: 		}
+;trabalho.c,97 :: 		}
 L_end_decremento_display:
 	RETURN      0
 ; end of _decremento_display
 
 _Semafaro_de_transito:
 
-;trabalho.c,100 :: 		void Semafaro_de_transito() {
-;trabalho.c,103 :: 		ADCON1 = 00000110;
-	MOVLW       72
-	MOVWF       ADCON1+0 
-;trabalho.c,105 :: 		TRISB = 0; // Configura PORTB como saída
+;trabalho.c,99 :: 		void Semafaro_de_transito() {
+;trabalho.c,101 :: 		TRISA = 0;
+	CLRF        TRISA+0 
+;trabalho.c,102 :: 		PORTA = 0;
+	CLRF        PORTA+0 
+;trabalho.c,103 :: 		TRISB = 0; // Configura PORTB como saída
 	CLRF        TRISB+0 
-;trabalho.c,106 :: 		TRISC = 0; // Configura PORTC como saída
+;trabalho.c,104 :: 		TRISC = 0; // Configura PORTC como saída
 	CLRF        TRISC+0 
-;trabalho.c,107 :: 		TRISC.F0 = 0; // Configura pino RC0 como saída (relé 1)
+;trabalho.c,105 :: 		TRISC.F0 = 0; // Configura pino RC0 como saída (relé 1)
 	BCF         TRISC+0, 0 
-;trabalho.c,108 :: 		Lcd_Init();
+;trabalho.c,106 :: 		Lcd_Init();
 	CALL        _Lcd_Init+0, 0
-;trabalho.c,110 :: 		while (1) {
+;trabalho.c,108 :: 		while (1) {
 L_Semafaro_de_transito14:
-;trabalho.c,111 :: 		if (PORTC.F0 == 0) { // Se o sinal estiver vermelho
+;trabalho.c,109 :: 		if (PORTC.F0 == 0) { // Se o sinal estiver vermelho
 	BTFSC       PORTC+0, 0 
 	GOTO        L_Semafaro_de_transito16
-;trabalho.c,112 :: 		PORTB = 255; // Liga todos os LEDs da porta B (vermelho)
+;trabalho.c,110 :: 		PORTB = 255; // Liga todos os LEDs da porta B (vermelho)
 	MOVLW       255
 	MOVWF       PORTB+0 
-;trabalho.c,113 :: 		Lcd_Out(3, 1, "Fechado");
+;trabalho.c,111 :: 		Lcd_Out(3, 1, "Fechado");
 	MOVLW       3
 	MOVWF       FARG_Lcd_Out_row+0 
 	MOVLW       1
@@ -345,7 +346,7 @@ L_Semafaro_de_transito14:
 	MOVLW       hi_addr(?lstr3_trabalho+0)
 	MOVWF       FARG_Lcd_Out_text+1 
 	CALL        _Lcd_Out+0, 0
-;trabalho.c,114 :: 		for (tempo_sinal_fechado = 20; tempo_sinal_fechado >= 0; tempo_sinal_fechado--) {
+;trabalho.c,112 :: 		for (tempo_sinal_fechado = 20; tempo_sinal_fechado >= 0; tempo_sinal_fechado--) {
 	MOVLW       20
 	MOVWF       Semafaro_de_transito_tempo_sinal_fechado_L0+0 
 	MOVLW       0
@@ -357,27 +358,30 @@ L_Semafaro_de_transito17:
 	MOVLW       128
 	SUBWF       R0, 0 
 	BTFSS       STATUS+0, 2 
-	GOTO        L__Semafaro_de_transito39
+	GOTO        L__Semafaro_de_transito38
 	MOVLW       0
 	SUBWF       Semafaro_de_transito_tempo_sinal_fechado_L0+0, 0 
-L__Semafaro_de_transito39:
+L__Semafaro_de_transito38:
 	BTFSS       STATUS+0, 0 
 	GOTO        L_Semafaro_de_transito18
-;trabalho.c,115 :: 		if (tempo_sinal_fechado == 9) {
+;trabalho.c,113 :: 		if (tempo_sinal_fechado == 9) {
 	MOVLW       0
 	XORWF       Semafaro_de_transito_tempo_sinal_fechado_L0+1, 0 
 	BTFSS       STATUS+0, 2 
-	GOTO        L__Semafaro_de_transito40
+	GOTO        L__Semafaro_de_transito39
 	MOVLW       9
 	XORWF       Semafaro_de_transito_tempo_sinal_fechado_L0+0, 0 
-L__Semafaro_de_transito40:
+L__Semafaro_de_transito39:
 	BTFSS       STATUS+0, 2 
 	GOTO        L_Semafaro_de_transito20
-;trabalho.c,116 :: 		decremento_display(); // Atualiza o display com o tempo restante
+;trabalho.c,114 :: 		decremento_display(); // Atualiza o display com o tempo restante
 	CALL        _decremento_display+0, 0
-;trabalho.c,117 :: 		}
+;trabalho.c,115 :: 		}
 L_Semafaro_de_transito20:
-;trabalho.c,118 :: 		delay_ms(1000); // Aguarda 1 segundo
+;trabalho.c,116 :: 		PORTB = 255;
+	MOVLW       255
+	MOVWF       PORTB+0 
+;trabalho.c,117 :: 		delay_ms(1000); // Aguarda 1 segundo
 	MOVLW       11
 	MOVWF       R11, 0
 	MOVLW       38
@@ -393,26 +397,26 @@ L_Semafaro_de_transito21:
 	BRA         L_Semafaro_de_transito21
 	NOP
 	NOP
-;trabalho.c,114 :: 		for (tempo_sinal_fechado = 20; tempo_sinal_fechado >= 0; tempo_sinal_fechado--) {
+;trabalho.c,112 :: 		for (tempo_sinal_fechado = 20; tempo_sinal_fechado >= 0; tempo_sinal_fechado--) {
 	MOVLW       1
 	SUBWF       Semafaro_de_transito_tempo_sinal_fechado_L0+0, 1 
 	MOVLW       0
 	SUBWFB      Semafaro_de_transito_tempo_sinal_fechado_L0+1, 1 
-;trabalho.c,119 :: 		}
+;trabalho.c,118 :: 		}
 	GOTO        L_Semafaro_de_transito17
 L_Semafaro_de_transito18:
-;trabalho.c,122 :: 		PORTC.F0 = 1; // Muda para o estado verde
+;trabalho.c,121 :: 		PORTC.F0 = 1; // Muda para o estado verde
 	BSF         PORTC+0, 0 
-;trabalho.c,123 :: 		Lcd_Cmd(_LCD_CLEAR);
+;trabalho.c,122 :: 		Lcd_Cmd(_LCD_CLEAR);
 	MOVLW       1
 	MOVWF       FARG_Lcd_Cmd_out_char+0 
 	CALL        _Lcd_Cmd+0, 0
-;trabalho.c,124 :: 		}
+;trabalho.c,123 :: 		}
 L_Semafaro_de_transito16:
-;trabalho.c,125 :: 		if (PORTC.F0 == 1) {
+;trabalho.c,124 :: 		if (PORTC.F0 == 1) {
 	BTFSS       PORTC+0, 0 
 	GOTO        L_Semafaro_de_transito22
-;trabalho.c,126 :: 		Lcd_Out(3, 1, "Aberto");
+;trabalho.c,125 :: 		Lcd_Out(3, 1, "Aberto");
 	MOVLW       3
 	MOVWF       FARG_Lcd_Out_row+0 
 	MOVLW       1
@@ -422,12 +426,12 @@ L_Semafaro_de_transito16:
 	MOVLW       hi_addr(?lstr4_trabalho+0)
 	MOVWF       FARG_Lcd_Out_text+1 
 	CALL        _Lcd_Out+0, 0
-;trabalho.c,127 :: 		PORTB = 0b11111000;
+;trabalho.c,126 :: 		PORTB = 0b11111000;
 	MOVLW       248
 	MOVWF       PORTB+0 
-;trabalho.c,128 :: 		PORTC.F1 = 1; // Liga o Buzzer
+;trabalho.c,127 :: 		PORTC.F1 = 1; // Liga o Buzzer
 	BSF         PORTC+0, 1 
-;trabalho.c,129 :: 		delay_ms(1000); // Mantém o buzzer ligado por 2 segundos
+;trabalho.c,128 :: 		delay_ms(1000); // Mantém o buzzer ligado por 2 segundos
 	MOVLW       11
 	MOVWF       R11, 0
 	MOVLW       38
@@ -443,78 +447,58 @@ L_Semafaro_de_transito23:
 	BRA         L_Semafaro_de_transito23
 	NOP
 	NOP
-;trabalho.c,130 :: 		PORTC.F1 = 0; // Desliga o Buzzer
+;trabalho.c,129 :: 		PORTC.F1 = 0; // Desliga o Buzzer
 	BCF         PORTC+0, 1 
-;trabalho.c,133 :: 		decremento_display();
+;trabalho.c,130 :: 		decremento_display();
 	CALL        _decremento_display+0, 0
-;trabalho.c,135 :: 		PORTC.F0 = 0;
+;trabalho.c,132 :: 		PORTC.F0 = 0;
 	BCF         PORTC+0, 0 
-;trabalho.c,136 :: 		Lcd_Cmd(_LCD_CLEAR);
+;trabalho.c,133 :: 		Lcd_Cmd(_LCD_CLEAR);
 	MOVLW       1
 	MOVWF       FARG_Lcd_Cmd_out_char+0 
 	CALL        _Lcd_Cmd+0, 0
-;trabalho.c,137 :: 		}
+;trabalho.c,134 :: 		}
 L_Semafaro_de_transito22:
-;trabalho.c,140 :: 		if (Button(&PORTB, 1, 1, 0) == 255) {
-	MOVLW       PORTB+0
-	MOVWF       FARG_Button_port+0 
-	MOVLW       hi_addr(PORTB+0)
-	MOVWF       FARG_Button_port+1 
-	MOVLW       1
-	MOVWF       FARG_Button_pin+0 
-	MOVLW       1
-	MOVWF       FARG_Button_time_ms+0 
-	CLRF        FARG_Button_active_state+0 
-	CALL        _Button+0, 0
-	MOVF        R0, 0 
-	XORLW       255
-	BTFSS       STATUS+0, 2 
-	GOTO        L_Semafaro_de_transito24
-;trabalho.c,141 :: 		break; // Sai do loop
-	GOTO        L_Semafaro_de_transito15
-;trabalho.c,142 :: 		}
-L_Semafaro_de_transito24:
-;trabalho.c,143 :: 		}
+;trabalho.c,135 :: 		}
 	GOTO        L_Semafaro_de_transito14
-L_Semafaro_de_transito15:
-;trabalho.c,144 :: 		}
+;trabalho.c,136 :: 		}
 L_end_Semafaro_de_transito:
 	RETURN      0
 ; end of _Semafaro_de_transito
 
 _main:
 
-;trabalho.c,146 :: 		void main() {
-;trabalho.c,147 :: 		int contagem_timer = 0;
+;trabalho.c,138 :: 		void main() {
+;trabalho.c,139 :: 		int contagem_timer = 0;
 	CLRF        main_contagem_timer_L0+0 
 	CLRF        main_contagem_timer_L0+1 
-;trabalho.c,148 :: 		TRISB = 0b00000011;
+;trabalho.c,140 :: 		TRISB = 0b00000011;
 	MOVLW       3
 	MOVWF       TRISB+0 
-;trabalho.c,149 :: 		TRISD = 0;
+;trabalho.c,141 :: 		TRISD = 0;
 	CLRF        TRISD+0 
-;trabalho.c,150 :: 		Lcd_Init();
+;trabalho.c,142 :: 		Lcd_Init();
 	CALL        _Lcd_Init+0, 0
-;trabalho.c,153 :: 		Lcd_Cmd(_LCD_CLEAR);
+;trabalho.c,145 :: 		Lcd_Cmd(_LCD_CLEAR);
 	MOVLW       1
 	MOVWF       FARG_Lcd_Cmd_out_char+0 
 	CALL        _Lcd_Cmd+0, 0
-;trabalho.c,154 :: 		Lcd_Cmd(_LCD_CURSOR_OFF);
+;trabalho.c,146 :: 		Lcd_Cmd(_LCD_CURSOR_OFF);
 	MOVLW       12
 	MOVWF       FARG_Lcd_Cmd_out_char+0 
 	CALL        _Lcd_Cmd+0, 0
-;trabalho.c,157 :: 		T0CON = 0b10000110; // DEFINIÇÃO DO PRESCALER
+;trabalho.c,149 :: 		T0CON = 0b10000110; // DEFINIÇÃO DO PRESCALER
 	MOVLW       134
 	MOVWF       T0CON+0 
-;trabalho.c,158 :: 		TMR0L = 0x47; // RESULTADO DA CONTA
+;trabalho.c,150 :: 		TMR0L = 0x47; // RESULTADO DA CONTA
 	MOVLW       71
 	MOVWF       TMR0L+0 
-;trabalho.c,159 :: 		TMR0H = 0xC3; // RESULTADO DA CONTA
+;trabalho.c,151 :: 		TMR0H = 0xC3; // RESULTADO DA CONTA
 	MOVLW       195
 	MOVWF       TMR0H+0 
-;trabalho.c,160 :: 		INTCON.TMR0IF = 0; // Estouro do TIMER0
+;trabalho.c,152 :: 		INTCON.TMR0IF = 0; // Estouro do TIMER0
 	BCF         INTCON+0, 2 
-;trabalho.c,162 :: 		Lcd_Out(1, 5, "Bem-vindo");
+;trabalho.c,154 :: 		Lcd_Out(1, 5, "Bem-vindo");
 	MOVLW       1
 	MOVWF       FARG_Lcd_Out_row+0 
 	MOVLW       5
@@ -524,7 +508,7 @@ _main:
 	MOVLW       hi_addr(?lstr5_trabalho+0)
 	MOVWF       FARG_Lcd_Out_text+1 
 	CALL        _Lcd_Out+0, 0
-;trabalho.c,163 :: 		Lcd_Out(2, 5, "a Bambui");
+;trabalho.c,155 :: 		Lcd_Out(2, 5, "a Bambui");
 	MOVLW       2
 	MOVWF       FARG_Lcd_Out_row+0 
 	MOVLW       5
@@ -534,52 +518,52 @@ _main:
 	MOVLW       hi_addr(?lstr6_trabalho+0)
 	MOVWF       FARG_Lcd_Out_text+1 
 	CALL        _Lcd_Out+0, 0
-;trabalho.c,164 :: 		CustomChar(3, 5); // Chamada da função que desenha o caracter especial
+;trabalho.c,156 :: 		CustomChar(3, 5); // Chamada da função que desenha o caracter especial
 	MOVLW       3
 	MOVWF       FARG_CustomChar_pos_row+0 
 	MOVLW       5
 	MOVWF       FARG_CustomChar_pos_char+0 
 	CALL        _CustomChar+0, 0
-;trabalho.c,166 :: 		while (contagem_timer <= 2) {
-L_main25:
+;trabalho.c,158 :: 		while (contagem_timer <= 2) {
+L_main24:
 	MOVLW       128
 	MOVWF       R0 
 	MOVLW       128
 	XORWF       main_contagem_timer_L0+1, 0 
 	SUBWF       R0, 0 
 	BTFSS       STATUS+0, 2 
-	GOTO        L__main42
+	GOTO        L__main41
 	MOVF        main_contagem_timer_L0+0, 0 
 	SUBLW       2
-L__main42:
+L__main41:
 	BTFSS       STATUS+0, 0 
-	GOTO        L_main26
-;trabalho.c,167 :: 		if (INTCON.TMR0IF == 1) {
+	GOTO        L_main25
+;trabalho.c,159 :: 		if (INTCON.TMR0IF == 1) {
 	BTFSS       INTCON+0, 2 
-	GOTO        L_main27
-;trabalho.c,168 :: 		TMR0L = 0x47;
+	GOTO        L_main26
+;trabalho.c,160 :: 		TMR0L = 0x47;
 	MOVLW       71
 	MOVWF       TMR0L+0 
-;trabalho.c,169 :: 		TMR0H = 0xC3;
+;trabalho.c,161 :: 		TMR0H = 0xC3;
 	MOVLW       195
 	MOVWF       TMR0H+0 
-;trabalho.c,170 :: 		INTCON.TMR0IF = 0;
+;trabalho.c,162 :: 		INTCON.TMR0IF = 0;
 	BCF         INTCON+0, 2 
-;trabalho.c,171 :: 		contagem_timer++;
+;trabalho.c,163 :: 		contagem_timer++;
 	INFSNZ      main_contagem_timer_L0+0, 1 
 	INCF        main_contagem_timer_L0+1, 1 
-;trabalho.c,172 :: 		}
-L_main27:
-;trabalho.c,173 :: 		}
-	GOTO        L_main25
+;trabalho.c,164 :: 		}
 L_main26:
-;trabalho.c,174 :: 		Lcd_Cmd(_LCD_CLEAR);
+;trabalho.c,165 :: 		}
+	GOTO        L_main24
+L_main25:
+;trabalho.c,166 :: 		Lcd_Cmd(_LCD_CLEAR);
 	MOVLW       1
 	MOVWF       FARG_Lcd_Cmd_out_char+0 
 	CALL        _Lcd_Cmd+0, 0
-;trabalho.c,176 :: 		while (1) {
-L_main28:
-;trabalho.c,177 :: 		if (Button(&PORTB, 0, 1, 0) == 255) {
+;trabalho.c,168 :: 		while (1) {
+L_main27:
+;trabalho.c,169 :: 		if (Button(&PORTB, 0, 1, 0) == 255) {
 	MOVLW       PORTB+0
 	MOVWF       FARG_Button_port+0 
 	MOVLW       hi_addr(PORTB+0)
@@ -592,12 +576,12 @@ L_main28:
 	MOVF        R0, 0 
 	XORLW       255
 	BTFSS       STATUS+0, 2 
-	GOTO        L_main30
-;trabalho.c,178 :: 		Resistencia(); // Chama a função de controle da resistência
+	GOTO        L_main29
+;trabalho.c,170 :: 		Resistencia(); // Chama a função de controle da resistência
 	CALL        _Resistencia+0, 0
-;trabalho.c,179 :: 		}
-L_main30:
-;trabalho.c,181 :: 		if (Button(&PORTB, 1, 1, 0) == 255) {
+;trabalho.c,171 :: 		}
+L_main29:
+;trabalho.c,173 :: 		if (Button(&PORTB, 1, 1, 0) == 255) {
 	MOVLW       PORTB+0
 	MOVWF       FARG_Button_port+0 
 	MOVLW       hi_addr(PORTB+0)
@@ -611,14 +595,14 @@ L_main30:
 	MOVF        R0, 0 
 	XORLW       255
 	BTFSS       STATUS+0, 2 
-	GOTO        L_main31
-;trabalho.c,182 :: 		Semafaro_de_transito(); // Chama a função do semáforo
+	GOTO        L_main30
+;trabalho.c,174 :: 		Semafaro_de_transito(); // Chama a função do semáforo
 	CALL        _Semafaro_de_transito+0, 0
-;trabalho.c,183 :: 		}
-L_main31:
-;trabalho.c,184 :: 		}
-	GOTO        L_main28
-;trabalho.c,185 :: 		}
+;trabalho.c,175 :: 		}
+L_main30:
+;trabalho.c,176 :: 		}
+	GOTO        L_main27
+;trabalho.c,177 :: 		}
 L_end_main:
 	GOTO        $+0
 ; end of _main

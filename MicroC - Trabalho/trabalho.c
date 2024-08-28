@@ -52,7 +52,6 @@ void PWM_Cooler() {
 
         // Verifica se o botão RB1 foi pressionado para sair do loop
         if (Button(&PORTB, 1, 1, 0) == 255) {
-            //PWM1_Stop(); // Para o PWM
             break; // Sai do loop
         }
     }
@@ -87,7 +86,7 @@ void decremento_display() {
 
     TRISD = 0;
     TRISA = 0;
-    PORTA = 0b00111100;
+    PORTA = 0b00111000;
     PORTB = 0;
 
     for (decremento = 9; decremento >= 0; decremento--) {
@@ -99,9 +98,8 @@ void decremento_display() {
 
 void Semafaro_de_transito() {
     int tempo_sinal_fechado;
-    
-    ADCON1 = 00000110;
-
+    TRISA = 0;
+    PORTA = 0;
     TRISB = 0; // Configura PORTB como saída
     TRISC = 0; // Configura PORTC como saída
     TRISC.F0 = 0; // Configura pino RC0 como saída (relé 1)
@@ -115,6 +113,7 @@ void Semafaro_de_transito() {
                 if (tempo_sinal_fechado == 9) {
                     decremento_display(); // Atualiza o display com o tempo restante
                 }
+                PORTB = 255;
                 delay_ms(1000); // Aguarda 1 segundo
             }
 
@@ -128,17 +127,10 @@ void Semafaro_de_transito() {
             PORTC.F1 = 1; // Liga o Buzzer
             delay_ms(1000); // Mantém o buzzer ligado por 2 segundos
             PORTC.F1 = 0; // Desliga o Buzzer
-
-
             decremento_display();
 
             PORTC.F0 = 0;
             Lcd_Cmd(_LCD_CLEAR);
-        }
-
-        // Verifica se o botão RB1 foi pressionado para sair do loop
-        if (Button(&PORTB, 1, 1, 0) == 255) {
-            break; // Sai do loop
         }
     }
 }
